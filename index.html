@@ -3,111 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ccychou 的個人履歷</title>
+    <title>SYSTEM_ROOT: ccychou</title>
     <style>
-        /* 基礎設定：讓網頁看起來像一張乾淨的紙 */
-        body {
-            font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft JhengHei", sans-serif;
-            background-color: #e9ecef;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px; /* 限制寬度，模擬 A4 紙張感 */
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-            border-radius: 5px;
+        /* --- 核心設定 --- */
+        :root {
+            --bg-color: #050505;       /* 極深黑背景 */
+            --card-bg: #111;           /* 卡片背景 */
+            --text-main: #c9d1d9;      /* 主要文字灰白 */
+            --accent: #00f3ff;         /* 科技青 (Cyan) - 這是靈魂顏色 */
+            --accent-dim: rgba(0, 243, 255, 0.1);
+            --code-font: 'Consolas', 'Monaco', 'Courier New', monospace; /* 等寬字體 */
         }
 
-        /* 頂部個人資訊 */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--code-font); /* 強制使用程式碼字體 */
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            /* 背景加上一點點網格線條，增加科技感 */
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid #333;
+            border-left: 5px solid var(--accent); /* 左側螢光條 */
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1); /* 微微發光 */
+            position: relative;
+        }
+
+        /* --- 頂部打字機特效 --- */
         header {
-            border-bottom: 2px solid #333;
+            border-bottom: 1px dashed #333;
             padding-bottom: 20px;
             margin-bottom: 30px;
         }
+        
         h1 {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-dim); /* 文字發光 */
             margin: 0;
-            font-size: 2.5rem;
-            color: #2c3e50;
+            font-size: 2rem;
+            display: inline-block;
         }
+        
+        /* 模擬游標閃爍 */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 2rem;
+            background-color: var(--accent);
+            vertical-align: bottom;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .role-tag {
+            background: var(--accent-dim);
+            color: var(--accent);
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* --- 連結與聯絡資訊 --- */
         .contact-info {
-            margin-top: 10px;
-            color: #666;
-            font-size: 0.95rem;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #888;
         }
-        .contact-info span {
-            margin-right: 15px;
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
         }
-        a { color: #0366d6; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        a:hover {
+            border-bottom: 1px solid var(--accent);
+            text-shadow: 0 0 8px var(--accent);
+        }
 
-        /* 區塊標題 */
+        /* --- 區塊標題 --- */
         h2 {
-            color: #0366d6; /* 專業的藍色 */
-            font-size: 1.5rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 30px;
-            margin-bottom: 20px;
+            color: #fff;
+            font-size: 1.4rem;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+        /* 標題前面的裝飾符號 */
+        h2::before {
+            content: ">";
+            color: var(--accent);
+            margin-right: 10px;
+            font-weight: bold;
         }
 
-        /* 經歷與學歷的排版 */
-        .job-item, .edu-item {
-            margin-bottom: 25px;
+        /* --- 經歷區塊 --- */
+        .job-item {
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 1px solid #333; /* 時間軸線條 */
+            position: relative;
         }
+        /* 時間軸上的點點 */
+        .job-item::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            position: absolute;
+            left: -4.5px;
+            top: 5px;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
         .job-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
         }
         .job-title {
+            color: #fff;
             font-weight: bold;
             font-size: 1.1rem;
-            color: #222;
         }
-        .job-company {
-            font-style: italic;
-            color: #555;
-        }
-        .job-date {
-            color: #888;
-            font-size: 0.9rem;
-        }
-        
-        /* 列表樣式 */
-        ul {
-            margin-top: 5px;
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 5px;
-            color: #444;
+        .job-company { color: #888; }
+        .job-date { 
+            color: var(--accent); 
+            font-size: 0.85rem; 
+            font-family: monospace;
         }
 
-        /* 技能標籤 */
+        ul { margin: 0; padding-left: 20px; color: #bbb; }
+        li { margin-bottom: 5px; }
+
+        /* --- 技能標籤 --- */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
         .skill-tag {
-            background-color: #f1f8ff;
-            color: #0366d6;
-            padding: 5px 12px;
-            border-radius: 15px;
+            border: 1px solid #444;
+            color: #ccc;
+            padding: 5px 15px;
             font-size: 0.9rem;
-            font-weight: 500;
+            transition: 0.3s;
+            cursor: default;
+        }
+        .skill-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-dim);
+            transform: translateY(-2px);
         }
 
-        /* 手機版調整 */
+        /* --- 手機版適配 --- */
         @media (max-width: 600px) {
-            .container { padding: 20px; }
-            .job-header { flex-direction: column; }
+            .container { margin: 0; border: none; padding: 20px; }
+            h1 { font-size: 1.5rem; }
+            .cursor { height: 1.5rem; }
         }
     </style>
 </head>
@@ -115,74 +186,85 @@
 
     <div class="container">
         <header>
-            <h1>ccychou (周某某)</h1>
-            <div class="contact-info">
-                <span>📧 email@example.com</span>
-                <span>📱 0912-345-678</span>
-                <span>📍 Taiwan, Taipei</span>
-                <span>🔗 <a href="https://github.com/ccychou" target="_blank">github.com/ccychou</a></span>
+            <div>
+                <h1>ccychou_profile</h1><span class="cursor"></span>
+                <span class="role-tag">v2.0.5 READY</span>
             </div>
-            <p style="margin-top: 15px; color: #555;">
-                這是一段關於我的簡介。例如：擁有 3 年經驗的軟體工程師，熱衷於解決複雜問題，熟悉前端開發與自動化流程。對新技術充滿熱情，是一個快速學習者。
+            
+            <div class="contact-info">
+                <p>
+                    [USER]: 周某某 (ccychou)<br>
+                    [STATUS]: Online / Seeking Opportunities<br>
+                    [LOC]: Taiwan, Taipei
+                </p>
+                <p>
+                    > <a href="mailto:email@example.com">Send Email</a><br>
+                    > <a href="https://github.com/ccychou" target="_blank">Access GitHub Repo</a>
+                </p>
+            </div>
+            <p style="color: #bbb; margin-top: 20px;">
+                // 簡介<br>
+                擁有 3 年經驗的軟體開發者。擅長解決複雜問題，並致力於編寫乾淨、高效的程式碼。目前專注於前端技術與自動化系統。
             </p>
         </header>
 
         <section>
-            <h2>工作經歷 (Work Experience)</h2>
+            <h2>Execute: Work_Experience</h2>
             
             <div class="job-item">
                 <div class="job-header">
-                    <div>
-                        <span class="job-title">資深工程師</span> 
-                        <span class="job-company"> ｜ 某某科技公司</span>
-                    </div>
-                    <span class="job-date">2021 年 6 月 - 至今</span>
+                    <span class="job-title">資深工程師 (Senior Dev)</span>
+                    <span class="job-date">[2021.06 - PRESENT]</span>
                 </div>
+                <div class="job-company">@ 某某科技公司</div>
                 <ul>
-                    <li>負責公司核心產品的前端架構重構，提升頁面載入速度 30%。</li>
-                    <li>帶領 3 人團隊進行開發，並導入 Code Review 機制。</li>
-                    <li>解決了長期存在的資料庫同步問題。</li>
+                    <li>重構核心架構，系統效能提升 <span style="color:var(--accent)">30%</span>。</li>
+                    <li>導入 CI/CD 自動化流程，減少部署錯誤。</li>
+                    <li>領導 3 人開發小組進行模組化開發。</li>
                 </ul>
             </div>
 
             <div class="job-item">
                 <div class="job-header">
-                    <div>
-                        <span class="job-title">初階工程師</span> 
-                        <span class="job-company"> ｜ 某某新創公司</span>
-                    </div>
-                    <span class="job-date">2019 年 9 月 - 2021 年 5 月</span>
+                    <span class="job-title">初階工程師 (Junior Dev)</span>
+                    <span class="job-date">[2019.09 - 2021.05]</span>
                 </div>
+                <div class="job-company">@ 某某新創公司</div>
                 <ul>
-                    <li>協助開發形象網站，使用 React 與 Bootstrap。</li>
-                    <li>撰寫自動化測試腳本，減少人工測試時間。</li>
+                    <li>開發響應式網頁介面 (Responsive UI)。</li>
+                    <li>協助後端 API 串接與除錯。</li>
                 </ul>
             </div>
         </section>
 
         <section>
-            <h2>專業技能 (Skills)</h2>
+            <h2>Load: Skills_Database</h2>
             <div class="skills-container">
-                <span class="skill-tag">JavaScript / HTML / CSS</span>
-                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
                 <span class="skill-tag">React.js</span>
-                <span class="skill-tag">Git / GitHub</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Git / CLI</span>
+                <span class="skill-tag">Linux</span>
+                <span class="skill-tag">Docker</span>
                 <span class="skill-tag">SQL</span>
-                <span class="skill-tag">專案管理</span>
-                <span class="skill-tag">英文 (TOEIC 850)</span>
             </div>
         </section>
 
         <section>
-            <h2>學歷 (Education)</h2>
-            <div class="edu-item">
+            <h2>Load: Education_History</h2>
+            <div class="job-item" style="border:none;">
                 <div class="job-header">
                     <span class="job-title">資訊工程學系 學士</span>
-                    <span class="job-date">2015 - 2019</span>
+                    <span class="job-date">[2015 - 2019]</span>
                 </div>
-                <div class="job-company">某某大學 (University Name)</div>
+                <div class="job-company">@ 某某大學</div>
             </div>
         </section>
+        
+        <footer style="margin-top: 50px; border-top: 1px dashed #333; padding-top: 20px; font-size: 0.8rem; color: #555; text-align: center;">
+            <p>SYSTEM TERMINATED. END OF FILE.</p>
+            <p>&copy; 2025 ccychou.github.io</p>
+        </footer>
 
     </div>
 
