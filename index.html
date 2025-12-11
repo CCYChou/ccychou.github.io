@@ -3,69 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ccychou 的個人主頁</title>
+    <title>ccychou 的個人履歷</title>
     <style>
+        /* 基礎設定：讓網頁看起來像一張乾淨的紙 */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft JhengHei", sans-serif;
+            background-color: #e9ecef;
             color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
         }
-        .card {
+        .container {
+            max-width: 800px; /* 限制寬度，模擬 A4 紙張感 */
+            margin: 0 auto;
             background: white;
-            padding: 2rem;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            border-radius: 5px;
+        }
+
+        /* 頂部個人資訊 */
+        header {
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+        .contact-info {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .contact-info span {
+            margin-right: 15px;
+        }
+        a { color: #0366d6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* 區塊標題 */
+        h2 {
+            color: #0366d6; /* 專業的藍色 */
+            font-size: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        /* 經歷與學歷的排版 */
+        .job-item, .edu-item {
+            margin-bottom: 25px;
+        }
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+        .job-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #222;
+        }
+        .job-company {
+            font-style: italic;
+            color: #555;
+        }
+        .job-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* 列表樣式 */
+        ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        /* 技能標籤 */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 5px 12px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            margin-bottom: 1rem;
+
+        /* 手機版調整 */
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            .job-header { flex-direction: column; }
         }
-        h1 { margin: 0.5rem 0; font-size: 1.8rem; }
-        p.title { color: #666; margin-bottom: 1.5rem; font-size: 0.9rem; }
-        .links { display: flex; flex-direction: column; gap: 10px; }
-        .btn {
-            display: block;
-            background-color: #24292e; /* GitHub 黑色 */
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-        .btn:hover { background-color: #0366d6; transform: translateY(-2px); }
-        .btn.secondary { background-color: #fff; color: #333; border: 1px solid #ddd; }
-        .btn.secondary:hover { background-color: #f6f8fa; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <img src="https://github.com/ccychou.png" alt="Avatar" class="avatar">
-        
-        <h1>Hello, I'm ccychou</h1>
-        <p class="title">這裡可以寫你的職業或興趣<br>例如：工程師 / 攝影愛好者 / 旅行家</p>
-        
-        <p>歡迎來到我的個人頁面！這是我透過 GitHub Pages 建立的第一個網站。</p>
+    <div class="container">
+        <header>
+            <h1>ccychou (周某某)</h1>
+            <div class="contact-info">
+                <span>📧 email@example.com</span>
+                <span>📱 0912-345-678</span>
+                <span>📍 Taiwan, Taipei</span>
+                <span>🔗 <a href="https://github.com/ccychou" target="_blank">github.com/ccychou</a></span>
+            </div>
+            <p style="margin-top: 15px; color: #555;">
+                這是一段關於我的簡介。例如：擁有 3 年經驗的軟體工程師，熱衷於解決複雜問題，熟悉前端開發與自動化流程。對新技術充滿熱情，是一個快速學習者。
+            </p>
+        </header>
 
-        <div class="links">
-            <a href="https://github.com/ccychou" class="btn">我的 GitHub</a>
-            <a href="#" class="btn secondary">Facebook</a>
-            <a href="#" class="btn secondary">Instagram</a>
-            <a href="mailto:你的email@example.com" class="btn secondary">聯絡我</a>
-        </div>
+        <section>
+            <h2>工作經歷 (Work Experience)</h2>
+            
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">資深工程師</span> 
+                        <span class="job-company"> ｜ 某某科技公司</span>
+                    </div>
+                    <span class="job-date">2021 年 6 月 - 至今</span>
+                </div>
+                <ul>
+                    <li>負責公司核心產品的前端架構重構，提升頁面載入速度 30%。</li>
+                    <li>帶領 3 人團隊進行開發，並導入 Code Review 機制。</li>
+                    <li>解決了長期存在的資料庫同步問題。</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">初階工程師</span> 
+                        <span class="job-company"> ｜ 某某新創公司</span>
+                    </div>
+                    <span class="job-date">2019 年 9 月 - 2021 年 5 月</span>
+                </div>
+                <ul>
+                    <li>協助開發形象網站，使用 React 與 Bootstrap。</li>
+                    <li>撰寫自動化測試腳本，減少人工測試時間。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>專業技能 (Skills)</h2>
+            <div class="skills-container">
+                <span class="skill-tag">JavaScript / HTML / CSS</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">React.js</span>
+                <span class="skill-tag">Git / GitHub</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">專案管理</span>
+                <span class="skill-tag">英文 (TOEIC 850)</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>學歷 (Education)</h2>
+            <div class="edu-item">
+                <div class="job-header">
+                    <span class="job-title">資訊工程學系 學士</span>
+                    <span class="job-date">2015 - 2019</span>
+                </div>
+                <div class="job-company">某某大學 (University Name)</div>
+            </div>
+        </section>
+
     </div>
 
 </body>
