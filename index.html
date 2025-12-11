@@ -100,12 +100,44 @@
             transition: width 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--black);
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
+        }
+
+        /* === 回首頁按鈕 === */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(255, 59, 59, 0.3);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 30px rgba(255, 59, 59, 0.5);
         }
 
         /* === Hero 區塊 === */
@@ -318,6 +350,7 @@
             gap: 0;
             margin-bottom: 60px;
             border-bottom: 2px solid var(--light-gray);
+            flex-wrap: wrap;
         }
 
         .tab-button {
@@ -487,6 +520,74 @@
 
         .experience-list li:hover::before {
             transform: translateX(5px);
+        }
+
+        /* === 專案網格 === */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: transparent;
+            border: 2px solid var(--light-gray);
+            padding: 40px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 59, 59, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-title {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        .project-desc {
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            padding: 5px 15px;
+            background: rgba(255, 59, 59, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            font-weight: 600;
         }
 
         /* === 技能區塊 === */
@@ -694,6 +795,10 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -702,7 +807,11 @@
             }
 
             .nav-links {
-                display: none;
+                gap: 20px;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
             }
 
             .hero,
@@ -737,7 +846,14 @@
 
             .tab-button {
                 padding: 15px 20px;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
             }
         }
 
@@ -779,19 +895,24 @@
 
     <!-- 導航欄 -->
     <nav id="navbar">
-        <a href="#" class="logo">TOMCHOU</a>
+        <a href="#hero" class="logo">TOMCHOU</a>
         <ul class="nav-links">
+            <li><a href="#about">About</a></li>
             <li><a href="#work">Work</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
+    <!-- 回首頁按鈕 -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
     <!-- 裝飾線 -->
     <div class="decorative-line"></div>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="hero-container">
             <div class="hero-number">001 / DEVELOPER</div>
             <h1 class="hero-title">TomChou</h1>
@@ -813,9 +934,13 @@
         </div>
     </section>
 
-    <!-- 介紹段落 -->
-    <section class="section">
-        <div class="intro-text fade-in">
+    <!-- About 區塊 -->
+    <section class="section fade-in" id="about">
+        <div class="section-header">
+            <div class="section-number">002 / ABOUT</div>
+            <h2 class="section-title">關於我</h2>
+        </div>
+        <div class="intro-text">
             我相信<strong>優秀的程式碼</strong>不僅能解決問題,更能創造價值。在過去五年的開發生涯中,我專注於將複雜的需求轉化為簡潔、可維護的解決方案,並持續追求技術卓越與創新。
         </div>
     </section>
@@ -823,7 +948,7 @@
     <!-- 工作經歷 -->
     <section class="section fade-in" id="work">
         <div class="section-header">
-            <div class="section-number">002 / EXPERIENCE</div>
+            <div class="section-number">003 / EXPERIENCE</div>
             <h2 class="section-title">工作經歷</h2>
         </div>
 
@@ -918,10 +1043,100 @@
         </div>
     </section>
 
+    <!-- 專案作品 -->
+    <section class="section fade-in" id="projects">
+        <div class="section-header">
+            <div class="section-number">004 / PROJECTS</div>
+            <h2 class="section-title">專案作品</h2>
+        </div>
+
+        <!-- 分頁導航 -->
+        <div class="tab-nav">
+            <button class="tab-button active" data-tab="projects-all">全部專案</button>
+            <button class="tab-button" data-tab="projects-web">Web 應用</button>
+            <button class="tab-button" data-tab="projects-system">系統開發</button>
+        </div>
+
+        <!-- 全部專案 -->
+        <div class="tab-content active" id="projects-all">
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">電商平台系統</h3>
+                    <p class="project-desc">打造高效能的電商購物平台,支援大流量訪問與即時庫存管理。</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">數據分析儀表板</h3>
+                    <p class="project-desc">視覺化數據分析工具,提供即時報表與多維度數據分析功能。</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">智慧監控系統</h3>
+                    <p class="project-desc">工廠自動化監控系統,整合 IoT 設備與即時數據處理。</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">MQTT</span>
+                        <span class="tech-tag">InfluxDB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web 應用 -->
+        <div class="tab-content" id="projects-web">
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">電商平台系統</h3>
+                    <p class="project-desc">打造高效能的電商購物平台,支援大流量訪問與即時庫存管理。</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">數據分析儀表板</h3>
+                    <p class="project-desc">視覺化數據分析工具,提供即時報表與多維度數據分析功能。</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 系統開發 -->
+        <div class="tab-content" id="projects-system">
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">智慧監控系統</h3>
+                    <p class="project-desc">工廠自動化監控系統,整合 IoT 設備與即時數據處理。</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">MQTT</span>
+                        <span class="tech-tag">InfluxDB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 技能 -->
     <section class="section fade-in" id="skills">
         <div class="section-header">
-            <div class="section-number">003 / SKILLS</div>
+            <div class="section-number">005 / SKILLS</div>
             <h2 class="section-title">技術堆疊</h2>
         </div>
 
@@ -1066,6 +1281,28 @@
     </footer>
 
     <script>
+        // === 導航欄活動狀態 ===
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
         // === 分頁切換功能 ===
         const tabButtons = document.querySelectorAll('.tab-button');
         
@@ -1085,6 +1322,24 @@
                 // 添加新的 active 狀態
                 button.classList.add('active');
                 document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // === 回首頁按鈕 ===
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
 
